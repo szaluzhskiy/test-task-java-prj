@@ -113,6 +113,5 @@ public class CBRFCurrencyExchangeService {
             }
             //org.hibernate.exception.ConstraintViolationException
         }
-
     }
 }
