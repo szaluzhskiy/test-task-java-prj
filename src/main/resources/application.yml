@@ -1,0 +1,44 @@
+server:
+  port: 8085
+
+spring:
+  datasource:
+    hikari:
+      data-source-properties: stringtype=unspecified # hibernate map string type to varchar so it needed for jsonb
+  #Config DB
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    datasource:
+      url: jdbc:h2:mem:currencydb
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+      hikari:
+        minimum-idle: 2
+        maximum-pool-size: 10
+        maxLifetime: 60000
+        leak-detection-threshold: 80000
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.xml
+
+  # Enabling H2 Console
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+logging:
+  file:
+    path: log/target
+  level:
+    com.example: DEBUG
